@@ -1,0 +1,8 @@
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# 先开常用基础规:pyflakes + pycodestyle(部分) + import 排序
+select = ["E", "F", "I"]
+ignore = ["E501"]  # 暂时不强制行长度，避免大量格式改动

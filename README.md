@@ -1,3 +1,6 @@
+![CI](https://github.com/W1shBottle/streamlit-ai-companion/actions/workflows/ci.yml/badge.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # Streamlit AI Companion
 
 一个基于 Streamlit 的 AI 智能伴侣聊天应用（DeepSeek API，使用 OpenAI SDK 兼容接口）。
