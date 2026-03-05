@@ -1,5 +1,5 @@
-import os
 import json
+import os
 from datetime import datetime
 
 import streamlit as st
@@ -13,10 +13,7 @@ API_KEY_ENV = "DEEPSEEK_API_KEY"
 BASE_URL = "https://api.deepseek.com"
 MODEL_NAME = "deepseek-chat"
 
-client = OpenAI(
-    api_key=os.environ.get(API_KEY_ENV),
-    base_url=BASE_URL
-)
+client = OpenAI(api_key=os.environ.get(API_KEY_ENV), base_url=BASE_URL)
 
 # 设置页面的配置项
 st.set_page_config(
@@ -24,7 +21,7 @@ st.set_page_config(
     page_icon="💞",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={}
+    menu_items={},
 )
 
 # 大标题
@@ -33,6 +30,7 @@ st.title("AI智能伴侣")
 # 如果没有配置 key，给出友好提示（不阻塞页面，便于你调试界面）
 if not os.environ.get(API_KEY_ENV):
     st.warning(f"未检测到环境变量 {API_KEY_ENV}，请先设置后再开始对话。")
+
 
 # ----------------------------
 # Helpers
@@ -63,7 +61,7 @@ def save_session() -> None:
         "nick_name": st.session_state.nick_name,
         "nature": st.session_state.nature,
         "messages": st.session_state.messages,
-        "current_session": st.session_state.current_session
+        "current_session": st.session_state.current_session,
     }
 
     with open(session_file_path(st.session_state.current_session), "w", encoding="utf-8") as f:
@@ -184,7 +182,7 @@ with st.sidebar:
                 width="stretch",
                 icon="⭐️",
                 key=f"load_{session}",
-                type="primary" if session == st.session_state.current_session else "secondary"
+                type="primary" if session == st.session_state.current_session else "secondary",
             ):
                 load_session(session)
                 st.rerun()
@@ -226,10 +224,14 @@ if prompt:
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
-                {"role": "system", "content": system_prompt % (st.session_state.nick_name, st.session_state.nature)},
+                {
+                    "role": "system",
+                    "content": system_prompt
+                    % (st.session_state.nick_name, st.session_state.nature),
+                },
                 *st.session_state.messages,
             ],
-            stream=True
+            stream=True,
         )
 
         response_message = st.empty()
